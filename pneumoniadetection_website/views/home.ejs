@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html,
+        body {
+            display: grid;
+            height: 100vh;
+            width: 100%;
+            place-items: center;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        ::selection {
+            background: #ff80bf;
+
+        }
+
+        .container {
+            background: #fff;
+            max-width: 30vw;
+            width: 100%;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        .container form .title {
+            font-size: 30pxa2;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+            position: relative;
+        }
+
+        .container form .title:before {
+            content: '';
+            position: absolute;
+            height: 4px;
+            width: 33px;
+            left: 0px;
+            bottom: 3px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        .container form .input-box {
+            width: 100%;
+            height: 45px;
+            margin-top: 25px;
+            position: relative;
+        }
+
+        .container form .input-box input {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 16px;
+            border: none;
+        }
+
+        .container form .underline::before {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #ccc;
+            left: 0;
+            bottom: 0;
+        }
+
+        .container form .underline::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+            left: 0;
+            bottom: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: all 0.3s ease;
+        }
+
+        .container form .input-box input:focus~.underline::after,
+        .container form .input-box input:valid~.underline::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .container form .button {
+            margin: 40px 0 20px 0;
+        }
+
+        .container .input-box button[type="submit"] {
+            width: 275px;
+            height: 50px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+            font-size: 17px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .container .input-box button[type="submit"]:hover {
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        .container .option {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .container .input-box input[type="submit"] {
+            background: linear-gradient(to right, #6780ee 0%, #2be653 100%);
+            font-size: 17px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .container .input-box input[type="submit"]:hover {
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        #holder.hover {
+            border: 10px dashed #0c0 !important;
+        }
+
+        .logout {
+            float: right;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: black;
+            transition: all 0.3s ease;
+        }
+
+        .logout a:hover {
+            letter-spacing: 0.5px;
+            color: rgb(49, 49, 49);
+        }
+
+        .upload-container {
+        position: relative;
+    }
+    .upload-container input {
+        border: 1px solid #92b0b3;
+        background: #f1f1f1;
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        padding: 77px 4vw 14vw 4vw;
+        text-align: center !important;
+        width: 25vw;
+    }
+    .upload-container input:hover {
+        background: #ddd;
+    }   
+    .upload-container:before {
+        position: absolute;
+        top: 126px;
+        left: 3vw;
+        content: "(or) Drag and Drop files here.";
+        color: #3f8188;
+        font-weight: 900;
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <% if(log==1) {%>
+            <div class="logout"> <a href="/sig=8n">logout<img
+                        src="https://image.freepik.com/free-icon/logout_318-10026.jpg" alt="Lamp" width="15"
+                        height="15"></a></div>
+            <% } %>
+                <% if(log==0) {%>
+                    <h2 id="login_req">please <a href="/sig=8n">sign</a> / <a href="/register">register</a> to use the
+                        features
+                    </h2>
+                    <% } else {%>
+                        <br>
+                        <h2>Welcome <%=username %>
+                        </h2><br>
+                        <form method="POST" action="/home" enctype="multipart/form-data">
+                            <div class="input-box">
+                                <div class="upload-container">
+                                    <input type="file" id="file_upload"  name="image"/>
+                                     
+                                </div>
+                                <div class="underline"></div>
+                            </div>
+                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br><br>
+                            <div class="input-box">
+                                <input type="submit">
+                                <div class="underline"></div>
+                            </div>
+                        </form>
+                        <% } %>
+    </div>
+</body>
+
+</html>

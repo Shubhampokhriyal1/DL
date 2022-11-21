@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html,
+        body {
+            display: grid;
+            height: 100vh;
+            width: 100%;
+            place-items: center;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        ::selection {
+            background: #ff80bf;
+
+        }
+
+        .container {
+            background: #fff;
+            max-width: 356px;
+            width: 100%;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        .container .title {
+            font-size: 30px;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+            position: relative;
+        }
+
+        .container .title:before {
+            content: '';
+            position: absolute;
+            height: 4px;
+            width: 33px;
+            left: 0px;
+            bottom: 3px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        .container .input-box {
+            width: 100%;
+            height: 45px;
+            margin-top: 25px;
+            position: relative;
+        }
+
+        .container .input-box input {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 16px;
+            border: none;
+        }
+
+        .container .underline::before {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #ccc;
+            left: 0;
+            bottom: 0;
+        }
+
+        .container .underline::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+            left: 0;
+            bottom: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: all 0.3s ease;
+        }
+
+        .container .input-box input:focus~.underline::after,
+        .container .input-box input:valid~.underline::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .container .button {
+            margin: 40px 0 20px 0;
+        }
+
+        .container .input-box button[type="submit"] {
+            width: 275px;
+            height: 50px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+            font-size: 17px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .container .input-box button[type="submit"]:hover {
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+        }
+
+        .container .option {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .container .input-box input[type="submit"] {
+            background: linear-gradient(to right, #6780ee 0%, #2be653 100%);
+            font-size: 17px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .container .input-box .underline a {
+            text-decoration: none;
+            color: black;
+            transition: all 0.3s ease;
+        }
+
+        #negi {
+            color: green;
+        }
+
+        #posi {
+            color: red;
+        }
+
+        .container .input-box .underline a:hover {
+            letter-spacing: 1px;
+            color: rgb(231, 130, 47);
+        }
+
+        .container .input-box a button:hover {
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #6780ee 0%, #2be653 100%);
+        }
+
+        #holder.hover {
+            border: 10pxs #0c0 !important;
+        }
+
+        .container .input-box a button {
+            width: 275px;
+            height: 50px;
+            background: linear-gradient(to right, #2be653 0%, #6780ee 100%);
+            font-size: 17px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout {
+            float: right;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: black;
+            transition: all 0.3s ease;
+        }
+
+        .logout a:hover {
+            letter-spacing: 0.5px;
+            color: rgb(49, 49, 49);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <% if(log==1) {%>
+            <div class="logout"> <a href="/sig=8n">logout<img
+                        src="https://image.freepik.com/free-icon/logout_318-10026.jpg" alt="Lamp" width="15"
+                        height="15"></a></div>
+            <% } %>
+                <% if(log==0) {%>
+                    <h2 id="login_req">please <a href="/sig=8n">sign</a> / <a href="/register">register</a> to see
+                        results</h2>
+                    <% } else {%>
+                        <br>
+                        <h2>Welcome <%=username %>
+                        </h2><br>
+                        <% if(resu==1) {%>
+                            Chest X-ray is pneumonia
+                            <h3 class="res" id="posi">Positive</h3>
+                            <% } if(resu==0){ %>
+                                result for pneumonia:
+                                <h3 class="res" id="negi">Negative</h3>
+                                <%} %>
+                                    <% } %>
+                                        <div class="input-box">
+                                            <div class="underline">
+                                                <a href="/home"><button>Run test again</button></a>
+                                            </div>
+                                        </div>
+                                        <div class="input-box">
+                                            <div class="underline">
+                                                <a href="https://www.tensorflow.org/tutorials/images/cnn">Convolutional
+                                                    Neural Network</a>
+                                            </div>
+                                        </div>
+    </div>
+</body>
+
+</html>
